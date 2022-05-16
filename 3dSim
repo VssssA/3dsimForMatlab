@@ -1,0 +1,134 @@
+classdef Simulator3d < matlab.apps.AppBase
+
+    % Properties that correspond to app components
+    properties (Access = public)
+        UIFigure             matlab.ui.Figure
+        ColourDropDown       matlab.ui.control.DropDown
+        ColourDropDownLabel  matlab.ui.control.Label
+        Button_5             matlab.ui.control.Button
+        Button_4             matlab.ui.control.Button
+        Button_3             matlab.ui.control.Button
+        Button_2             matlab.ui.control.Button
+        Button               matlab.ui.control.Button
+    end
+
+    % Callbacks that handle component events
+    methods (Access = private)
+
+        % Button pushed function: Button
+        function ButtonPushed(app, event)
+    h(1) = axes('Position',[0 0 1 1]); sphere
+    set(h,'Visible','off')
+    set(gcf,'Renderer','painters')
+        end
+
+        % Button pushed function: Button_2
+        function Button_2Pushed(app, event)
+    h(1) = axes('Position',[0 0 .4 .6]); peaks;
+    set(h,'Visible','off')
+    set(gcf,'Renderer','painters')
+        end
+
+        % Button pushed function: Button_3
+        function Button_3Pushed(app, event)
+    h(1) =  axes('Position',[.5 .5 .5 .3]); cylinder([0 0 0.5])
+    set(h,'Visible','off')
+    set(gcf,'Renderer','painters')
+        end
+
+        % Button pushed function: Button_4
+        function Button_4Pushed(app, event)
+    h(1) = axes('Position',[0 .5 .5 .5]); sphere
+    set(h,'Visible','off')
+    set(gcf,'Renderer','painters')  
+        end
+
+        % Button pushed function: Button_5
+        function Button_5Pushed(app, event)
+    h(1) = axes('Position',[.5 0 .4 .4]); sphere
+    set(h,'Visible','off')
+    set(gcf,'Renderer','painters')
+        end
+    end
+
+    % Component initialization
+    methods (Access = private)
+
+        % Create UIFigure and components
+        function createComponents(app)
+
+            % Create UIFigure and hide until all components are created
+            app.UIFigure = uifigure('Visible', 'off');
+            app.UIFigure.Position = [100 100 640 480];
+            app.UIFigure.Name = 'MATLAB App';
+
+            % Create Button
+            app.Button = uibutton(app.UIFigure, 'push');
+            app.Button.ButtonPushedFcn = createCallbackFcn(app, @ButtonPushed, true);
+            app.Button.Position = [480 87 161 22];
+            app.Button.Text = 'Создать какую-то хуйню 1';
+
+            % Create Button_2
+            app.Button_2 = uibutton(app.UIFigure, 'push');
+            app.Button_2.ButtonPushedFcn = createCallbackFcn(app, @Button_2Pushed, true);
+            app.Button_2.Position = [480 66 161 22];
+            app.Button_2.Text = 'Создать какую-то хуйню 2';
+
+            % Create Button_3
+            app.Button_3 = uibutton(app.UIFigure, 'push');
+            app.Button_3.ButtonPushedFcn = createCallbackFcn(app, @Button_3Pushed, true);
+            app.Button_3.Position = [479 45 162 22];
+            app.Button_3.Text = 'Создать какую-то хуйню 3';
+
+            % Create Button_4
+            app.Button_4 = uibutton(app.UIFigure, 'push');
+            app.Button_4.ButtonPushedFcn = createCallbackFcn(app, @Button_4Pushed, true);
+            app.Button_4.Position = [479 24 162 22];
+            app.Button_4.Text = 'Создать какую-то хуйню 4';
+
+            % Create Button_5
+            app.Button_5 = uibutton(app.UIFigure, 'push');
+            app.Button_5.ButtonPushedFcn = createCallbackFcn(app, @Button_5Pushed, true);
+            app.Button_5.Position = [479 3 162 22];
+            app.Button_5.Text = 'Создать какую-то хуйню 5';
+
+            % Create ColourDropDownLabel
+            app.ColourDropDownLabel = uilabel(app.UIFigure);
+            app.ColourDropDownLabel.HorizontalAlignment = 'right';
+            app.ColourDropDownLabel.Position = [41 428 41 22];
+            app.ColourDropDownLabel.Text = 'Colour';
+
+            % Create ColourDropDown
+            app.ColourDropDown = uidropdown(app.UIFigure);
+            app.ColourDropDown.Position = [97 428 100 22];
+
+            % Show the figure after all components are created
+            app.UIFigure.Visible = 'on';
+        end
+    end
+
+    % App creation and deletion
+    methods (Access = public)
+
+        % Construct app
+        function app = Simulator3d
+
+            % Create UIFigure and components
+            createComponents(app)
+
+            % Register the app with App Designer
+            registerApp(app, app.UIFigure)
+
+            if nargout == 0
+                clear app
+            end
+        end
+
+        % Code that executes before app deletion
+        function delete(app)
+
+            % Delete UIFigure when app is deleted
+            delete(app.UIFigure)
+        end
+    end
+end
