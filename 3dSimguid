@@ -81,6 +81,7 @@ forward = get(handles.edit6,'string');
 forward = str2double(forward);
 back = get(handles.edit7,'string');
 back = str2double(back);
+V = 4/3 * 3.14 * r^3;
 surf(X * r + right - left,Y * r + forward - back,Z * r + up - down)
 colormap(winter)
 hold on 
@@ -105,8 +106,7 @@ forward = get(handles.edit6,'string');
 forward = str2double(forward);
 back = get(handles.edit7,'string');
 back = str2double(back);
-V = 1/6 * pi * d*3*r;
-
+V = 3.14 * r^2 * Z ;
 surf(X * r + right - left,Y * r + forward - back,Z * r + up - down)
 colormap(jet)
 hold on
@@ -137,6 +137,7 @@ forward = get(handles.edit6,'string');
 forward = str2double(forward);
 back = get(handles.edit7,'string');
 back = str2double(back);
+V = 1/3 * 3.14 * r^2 * Z;
 surf(X * r + right - left,Y * r + forward - back,Z * r + up - down,'FaceAlpha',1)
 colormap(winter)
 hold on
@@ -147,6 +148,7 @@ function pushbutton13_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 alpha=0.8; % transparency (max=1=opaque)
+
 X = [0 0 0 0 0 1; 1 0 1 1 1 1; 1 0 1 1 1 1; 0 0 0 0 0 1];
 Y = [0 0 0 0 1 0; 0 1 0 0 1 1; 0 1 1 1 1 1; 0 0 1 1 1 0];
 Z = [0 0 1 0 0 0; 0 0 1 0 0 0; 1 1 1 0 1 1; 1 1 1 0 1 1];
@@ -165,9 +167,9 @@ forward = get(handles.edit6,'string');
 forward = str2double(forward);
 back = get(handles.edit7,'string');
 back = str2double(back);
-X = (X * r + right - left);
-Y = (Y * r + forward - back);
-Z = (Z * r + up - down);
+X = (X * r  + right - left);
+Y = (Y * r  + forward - back);
+Z = (Z * r  + up - down);
 fill3(X,Y,Z,C,'FaceAlpha',alpha);
 hold on
 
